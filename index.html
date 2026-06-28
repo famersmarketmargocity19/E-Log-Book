@@ -23,6 +23,13 @@
     --cream:#f3efe6;
     --ink:#1b1b1b;
     --muted:#5a5f73;
+    /* FM99 Dark Green Theme */
+    --fm-dark:#0d2b1e;
+    --fm-green:#1c6b52;
+    --fm-green2:#2e9e75;
+    --fm-light:#e8f5ef;
+    --fm-gold:#f4d11a;
+    --fm-orange:#e8612c;
   }
   *{box-sizing:border-box;}
   body{
@@ -67,75 +74,213 @@
 
   /* ---------- HOME ---------- */
   #home{display:flex;}
+
+  /* ===== HOME DARK GREEN THEME ===== */
+  #home{
+    background:var(--fm-dark);
+    flex-direction:column;
+  }
+
+  /* TOP HEADER STRIP — cream background with logo + kasir badge */
   .home-header{
-    background:#f3efe6;
-    padding:24px 24px 20px;
+    background:var(--fm-dark);
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  /* Green gradient top strip */
+  .home-top-strip{
+    background:linear-gradient(135deg, #0a1f14 0%, var(--fm-green) 100%);
+    padding:18px 20px 14px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    border-bottom:2px solid rgba(255,255,255,.08);
   }
-  .logo99{
-    width:110px;
+
+  .fm-logo-text{
+    display:flex;
+    flex-direction:column;
+    line-height:1.05;
   }
+  .fm-logo-farmers{
+    font-family:'Arial Black', Arial, sans-serif;
+    font-size:28px;
+    font-weight:900;
+    color:#a8e6c8;
+    letter-spacing:2px;
+    text-shadow:0 2px 8px rgba(0,0,0,.4);
+  }
+  .fm-logo-market{
+    font-family:'Arial Black', Arial, sans-serif;
+    font-size:28px;
+    font-weight:900;
+    color:#a8e6c8;
+    letter-spacing:2px;
+    text-shadow:0 2px 8px rgba(0,0,0,.4);
+  }
+
+  /* KASIR DEPT badge */
   .kasir-dept{
     text-align:right;
     font-weight:900;
-    line-height:1.15;
+    line-height:1.1;
   }
-  .kasir-dept .k1{font-size:28px; color:#111; font-weight:900; letter-spacing:1px;}
-  .kasir-dept .k2{font-size:24px; color:#1c6b52; font-weight:900; letter-spacing:1px;}
-  .kasir-dept .fm{font-size:16px; color:#1c6b52; font-weight:700;}
+  .kasir-dept .k1{
+    font-size:30px;
+    color:#fff;
+    font-weight:900;
+    letter-spacing:2px;
+    text-shadow:0 2px 6px rgba(0,0,0,.5);
+  }
+  .kasir-dept .k2{
+    font-size:16px;
+    color:var(--fm-gold);
+    font-weight:800;
+    letter-spacing:3px;
+    text-transform:uppercase;
+  }
+  .kasir-dept .fm{
+    font-size:13px;
+    color:rgba(255,255,255,.6);
+    font-weight:600;
+    letter-spacing:2px;
+  }
 
+  /* Divider line with store name */
+  .home-store-bar{
+    background:var(--fm-green);
+    padding:8px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  .home-store-bar span{
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    opacity:.9;
+  }
+  .home-store-bar::before,
+  .home-store-bar::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:rgba(255,255,255,.3);
+  }
+
+  /* HERO SECTION */
   .home-body{
     flex:1;
-    background:#2f6fe0;
-    padding:40px 28px 20px;
+    background:transparent;
+    padding:32px 24px 24px;
     display:flex;
     flex-direction:column;
     align-items:center;
     text-align:center;
     color:#fff;
   }
+  .home-hero-title{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--fm-gold);
+    margin:0 0 8px;
+    opacity:.9;
+  }
   .home-body h1{
-    font-size:26px;
+    font-size:22px;
     font-weight:800;
-    margin:0 0 40px;
-    line-height:1.4;
+    margin:0 0 6px;
+    line-height:1.35;
+    color:#fff;
+    letter-spacing:.3px;
   }
-  .home-buttons{
-    display:flex;
-    gap:24px;
-    margin-top:8px;
-  }
-  .big-btn{
-    width:145px;
-    height:145px;
-    border:none;
-    border-radius:14px;
-    font-size:20px;
-    font-weight:900;
-    cursor:pointer;
-    line-height:1.3;
-    box-shadow:0 6px 18px rgba(0,0,0,.22);
-    transition:transform .15s ease;
+  .home-subtitle{
+    font-size:13px;
+    color:rgba(255,255,255,.55);
+    margin:0 0 36px;
+    font-weight:500;
     letter-spacing:.5px;
   }
-  .big-btn:active{transform:scale(.96);}
-  .btn-input{background:#f4d11a; color:#2a2000;}
-  .btn-report{background:#e8294b; color:#fff;}
 
+  /* ACTION BUTTONS */
+  .home-buttons{
+    display:flex;
+    gap:16px;
+    margin-bottom:36px;
+    width:100%;
+    max-width:320px;
+  }
+  .big-btn{
+    flex:1;
+    height:0;
+    padding-bottom:100%;
+    position:relative;
+    border:none;
+    border-radius:20px;
+    font-size:0;
+    cursor:pointer;
+    box-shadow:0 8px 24px rgba(0,0,0,.35);
+    transition:transform .15s ease, box-shadow .15s;
+    overflow:hidden;
+  }
+  .big-btn:active{
+    transform:scale(.95);
+    box-shadow:0 4px 12px rgba(0,0,0,.3);
+  }
+  .big-btn-inner{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:12px;
+  }
+  .big-btn-icon{
+    font-size:32px;
+    line-height:1;
+  }
+  .big-btn-label{
+    font-size:15px;
+    font-weight:900;
+    letter-spacing:1px;
+    line-height:1.2;
+  }
+
+  .btn-input{
+    background:linear-gradient(145deg, #f4d11a, #e8b800);
+    color:#2a2000;
+  }
+  .btn-input .big-btn-label{color:#2a2000;}
+
+  .btn-report{
+    background:linear-gradient(145deg, #e8294b, #b81e38);
+    color:#fff;
+  }
+  .btn-report .big-btn-label{color:#fff;}
+
+  /* FOOTER BRAND */
   .home-footer-wrap{
     margin-top:auto;
-    padding:40px 0 0;
+    padding:24px 0 16px;
     width:100%;
     text-align:center;
+    border-top:1px solid rgba(255,255,255,.08);
   }
   .home-footer-brand{
-    font-size:32px;
+    font-size:22px;
     font-weight:900;
-    color:#1c6b52;
-    letter-spacing:2px;
-    text-shadow:0 2px 0 rgba(0,0,0,.08);
+    color:var(--fm-green2);
+    letter-spacing:3px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -146,22 +291,44 @@
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    width:40px;
-    height:40px;
+    width:34px;
+    height:34px;
     border-radius:50%;
-    font-size:20px;
+    border:2px solid var(--fm-orange);
+    font-size:16px;
     font-weight:900;
-    color:#e8612c;
+    color:var(--fm-orange);
     font-family:Georgia,'Times New Roman',serif;
     flex-shrink:0;
   }
   .home-footer-tagline{
-    font-size:15px;
+    font-size:12px;
     font-style:italic;
-    color:#f4d11a;
-    font-weight:700;
-    margin-top:4px;
-    letter-spacing:.5px;
+    color:rgba(255,255,255,.4);
+    font-weight:600;
+    margin-top:5px;
+    letter-spacing:1px;
+  }
+
+  .report-logo-text{
+    display:flex;
+    flex-direction:column;
+    line-height:1.05;
+    flex-shrink:0;
+  }
+  .report-logo-farmers{
+    font-family:'Arial Black', Arial, sans-serif;
+    font-size:13px;
+    font-weight:900;
+    color:#1c6b52;
+    letter-spacing:1.5px;
+  }
+  .report-logo-market{
+    font-family:'Arial Black', Arial, sans-serif;
+    font-size:13px;
+    font-weight:900;
+    color:#1c6b52;
+    letter-spacing:1.5px;
   }
 
   /* ---------- TOP BAR (input/report) ---------- */
@@ -714,6 +881,41 @@
     box-shadow:0 4px 14px rgba(0,0,0,.18);
     transition:transform .15s;
   }
+  .select-platform{
+    height:34px;
+    padding:0 28px 0 10px;
+    border:1.5px solid var(--blue);
+    border-radius:8px;
+    background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%232f6fe0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 8px center;
+    appearance:none;
+    -webkit-appearance:none;
+    font-size:12px;
+    font-weight:700;
+    color:var(--blue-dark);
+    cursor:pointer;
+    min-width:110px;
+  }
+  .select-platform:focus{outline:none;border-color:var(--blue-dark);}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   .btn-home-back:active{transform:scale(.96);}
   @keyframes shake{
     0%,100%{transform:translateX(0);}
@@ -848,66 +1050,186 @@
     cursor:pointer;
   }
   .btn-login-cancel:active{background:#f5f5f5;}
+  /* ===== TOMBOL XLS ===== */
+  .btn-xls{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    background:var(--fm-green);
+    color:#fff;
+    border:none;
+    font-size:11px;
+    font-weight:800;
+    padding:5px 9px;
+    border-radius:8px;
+    cursor:pointer;
+    height:34px;
+    letter-spacing:.5px;
+    white-space:nowrap;
+    transition:background .15s;
+    flex-shrink:0;
+  }
+  .btn-xls:active{background:var(--fm-dark);}
+
+  /* ===== EXPORT MODAL ===== */
+  .xls-overlay{
+    display:none;
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:1100;
+    align-items:flex-end;
+    justify-content:center;
+  }
+  .xls-overlay.active{display:flex;}
+  .xls-card{
+    background:#fff;
+    width:100%;
+    max-width:480px;
+    border-radius:20px 20px 0 0;
+    overflow:hidden;
+    animation:slideUp .22s ease-out;
+  }
+  .xls-head{
+    background:linear-gradient(135deg, var(--fm-green), var(--fm-green2));
+    padding:20px 20px 16px;
+    text-align:center;
+    color:#fff;
+  }
+  .xls-head h3{margin:0 0 4px; font-size:18px; font-weight:900;}
+  .xls-head p{margin:0; font-size:12px; opacity:.85;}
+  .xls-body{padding:20px;}
+  .xls-field{margin-bottom:16px;}
+  .xls-field label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    color:#555;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:7px;
+  }
+  .xls-field input[type="date"]{
+    width:100%;
+    padding:12px 14px;
+    border:1.5px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+    background:#fafafa;
+    color:#222;
+    -webkit-appearance:none;
+  }
+  .xls-field input[type="date"]:focus{
+    outline:none;
+    border-color:var(--fm-green);
+    background:#fff;
+  }
+  .xls-info{
+    background:#f0faf5;
+    border:1.5px solid #b2dfcf;
+    color:#155a44;
+    font-size:13px;
+    font-weight:600;
+    padding:12px 14px;
+    border-radius:10px;
+    text-align:center;
+    margin-bottom:16px;
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .xls-info.warn{
+    background:#fff3f3;
+    border-color:#ffb3b3;
+    color:#c0002a;
+  }
+  .btn-xls-dl{
+    width:100%;
+    padding:15px;
+    background:var(--fm-green);
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    letter-spacing:.5px;
+    margin-bottom:10px;
+    transition:background .15s, transform .1s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  .btn-xls-dl:active{background:var(--fm-dark); transform:scale(.98);}
+  .btn-xls-dl:disabled{background:#aaa; cursor:not-allowed; transform:none;}
+  .btn-xls-cancel{
+    width:100%;
+    padding:13px;
+    background:none;
+    color:#888;
+    border:1.5px solid #ddd;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .btn-xls-cancel:active{background:#f5f5f5;}
+
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 </head>
 <body>
 
 <!-- ============ HOME SCREEN ============ -->
 <div class="screen active" id="home">
   <div class="home-header">
-    <svg class="logo99" viewBox="0 0 240 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Farmers Market 99">
-  <!-- LAUREL KIRI - melengkung setengah lingkaran -->
-  <g fill="#1c6b52">
-    <path d="M100 105 C95 98, 88 88, 78 75 C68 62, 58 48, 58 32" stroke="#1c6b52" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <ellipse cx="88" cy="95" rx="11" ry="5" transform="rotate(-60 88 95)"/>
-    <ellipse cx="81" cy="82" rx="11" ry="5" transform="rotate(-50 81 82)"/>
-    <ellipse cx="73" cy="69" rx="11" ry="5" transform="rotate(-40 73 69)"/>
-    <ellipse cx="66" cy="55" rx="11" ry="5" transform="rotate(-28 66 55)"/>
-    <ellipse cx="62" cy="41" rx="11" ry="5" transform="rotate(-14 62 41)"/>
-    <ellipse cx="62" cy="27" rx="11" ry="5" transform="rotate(2 62 27)"/>
-    <ellipse cx="68" cy="15" rx="11" ry="5" transform="rotate(18 68 15)"/>
-    <ellipse cx="79" cy="7"  rx="11" ry="5" transform="rotate(34 79 7)"/>
-  </g>
-  <!-- LAUREL KANAN -->
-  <g fill="#1c6b52">
-    <path d="M140 105 C145 98, 152 88, 162 75 C172 62, 182 48, 182 32" stroke="#1c6b52" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <ellipse cx="152" cy="95" rx="11" ry="5" transform="rotate(60 152 95)"/>
-    <ellipse cx="159" cy="82" rx="11" ry="5" transform="rotate(50 159 82)"/>
-    <ellipse cx="167" cy="69" rx="11" ry="5" transform="rotate(40 167 69)"/>
-    <ellipse cx="174" cy="55" rx="11" ry="5" transform="rotate(28 174 55)"/>
-    <ellipse cx="178" cy="41" rx="11" ry="5" transform="rotate(14 178 41)"/>
-    <ellipse cx="178" cy="27" rx="11" ry="5" transform="rotate(-2 178 27)"/>
-    <ellipse cx="172" cy="15" rx="11" ry="5" transform="rotate(-18 172 15)"/>
-    <ellipse cx="161" cy="7"  rx="11" ry="5" transform="rotate(-34 161 7)"/>
-  </g>
-  <!-- PENGIKAT BAWAH -->
-  <path d="M88 112 Q120 122 152 112" stroke="#1c6b52" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <!-- BORDER BOX untuk angka 99 -->
-  <rect x="72" y="18" width="96" height="72" rx="12" ry="12" fill="none" stroke="#1c6b52" stroke-width="3"/>
-  <!-- Angka 99 -->
-  <text x="120" y="74" text-anchor="middle" font-family="Georgia,serif" font-weight="900" font-size="50" fill="#e8612c" letter-spacing="-2">99</text>
-  <!-- FARMERS -->
-  <text x="120" y="152" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="32" fill="#1c6b52" letter-spacing="3">FARMERS</text>
-  <!-- MARKET -->
-  <text x="120" y="190" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="32" fill="#1c6b52" letter-spacing="3">MARKET</text>
-</svg>
-    <div class="kasir-dept">
-      <div class="k1">KASIR</div>
-      <div class="k2">DEPT <span class="fm">FM</span></div>
+    <!-- TOP STRIP: Logo + KASIR DEPT -->
+    <div class="home-top-strip">
+      <div></div>
+
+      <div class="kasir-dept">
+        <div class="k1">KASIR</div>
+        <div class="k2">DEPT <span class="fm">FM</span></div>
+      </div>
+    </div>
+
+    <!-- STORE NAME BAR -->
+    <div class="home-store-bar">
+      <span>Farmers Market Margo City</span>
     </div>
   </div>
+
+  <!-- HERO BODY -->
   <div class="home-body">
-    <h1>Welcome to<br>E Log Book E-Commerce<br>Report</h1>
+    <div class="home-hero-title">E-Commerce Log Book</div>
+    <h1>Pencatatan Order<br>Harian E-Commerce</h1>
+    <div class="home-subtitle">Blibli · Grabmart · WhatsApp</div>
+
     <div class="home-buttons">
-      <button class="big-btn btn-input" onclick="showScreen('inputScreen')">INPUT<br>DATA</button>
-      <button class="big-btn btn-report" onclick="openLoginModal()">REPORT<br>DATA</button>
+      <!-- INPUT DATA -->
+      <button class="big-btn btn-input" onclick="showScreen('inputScreen')">
+        <div class="big-btn-inner">
+          <div class="big-btn-icon">📋</div>
+          <div class="big-btn-label">INPUT<br>DATA</div>
+        </div>
+      </button>
+      <!-- REPORT DATA -->
+      <button class="big-btn btn-report" onclick="openLoginModal()">
+        <div class="big-btn-inner">
+          <div class="big-btn-icon">📊</div>
+          <div class="big-btn-label">REPORT<br>DATA</div>
+        </div>
+      </button>
     </div>
+
     <div class="home-footer-wrap">
       <div class="home-footer-brand">
         FARMERS <span class="brand-99">99</span> MARKET
       </div>
-      <div class="home-footer-tagline">fresh and friendly</div>
+      <div class="home-footer-tagline">fresh &amp; friendly · Margo City</div>
     </div>
   </div>
 </div>
@@ -966,7 +1288,7 @@
     </div>
 
     <div class="field">
-      <label>Bukti Foto Picker</label>
+      <label>Bukti Pengambilan Barang</label>
       <label class="upload-box">
         Tap or click to add a picture
         <input type="file" accept="image/*" id="f_fotopicker" onchange="previewImage(this,'preview_picker')">
@@ -996,38 +1318,20 @@
   <div class="back-strip" onclick="showScreen('home')" style="cursor:pointer;">‹ Back</div>
 
   <div class="report-header">
-    <svg class="logo99" style="width:60px" viewBox="0 0 240 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Farmers Market 99">
-  <g fill="#1c6b52">
-    <path d="M100 105 C95 98, 88 88, 78 75 C68 62, 58 48, 58 32" stroke="#1c6b52" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <ellipse cx="88" cy="95" rx="11" ry="5" transform="rotate(-60 88 95)"/>
-    <ellipse cx="81" cy="82" rx="11" ry="5" transform="rotate(-50 81 82)"/>
-    <ellipse cx="73" cy="69" rx="11" ry="5" transform="rotate(-40 73 69)"/>
-    <ellipse cx="66" cy="55" rx="11" ry="5" transform="rotate(-28 66 55)"/>
-    <ellipse cx="62" cy="41" rx="11" ry="5" transform="rotate(-14 62 41)"/>
-    <ellipse cx="62" cy="27" rx="11" ry="5" transform="rotate(2 62 27)"/>
-    <ellipse cx="68" cy="15" rx="11" ry="5" transform="rotate(18 68 15)"/>
-    <ellipse cx="79" cy="7"  rx="11" ry="5" transform="rotate(34 79 7)"/>
-  </g>
-  <g fill="#1c6b52">
-    <path d="M140 105 C145 98, 152 88, 162 75 C172 62, 182 48, 182 32" stroke="#1c6b52" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <ellipse cx="152" cy="95" rx="11" ry="5" transform="rotate(60 152 95)"/>
-    <ellipse cx="159" cy="82" rx="11" ry="5" transform="rotate(50 159 82)"/>
-    <ellipse cx="167" cy="69" rx="11" ry="5" transform="rotate(40 167 69)"/>
-    <ellipse cx="174" cy="55" rx="11" ry="5" transform="rotate(28 174 55)"/>
-    <ellipse cx="178" cy="41" rx="11" ry="5" transform="rotate(14 178 41)"/>
-    <ellipse cx="178" cy="27" rx="11" ry="5" transform="rotate(-2 178 27)"/>
-    <ellipse cx="172" cy="15" rx="11" ry="5" transform="rotate(-18 172 15)"/>
-    <ellipse cx="161" cy="7"  rx="11" ry="5" transform="rotate(-34 161 7)"/>
-  </g>
-  <path d="M88 112 Q120 122 152 112" stroke="#1c6b52" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <rect x="72" y="18" width="96" height="72" rx="12" ry="12" fill="none" stroke="#1c6b52" stroke-width="3"/>
-  <text x="120" y="74" text-anchor="middle" font-family="Georgia,serif" font-weight="900" font-size="50" fill="#e8612c" letter-spacing="-2">99</text>
-  <text x="120" y="152" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="32" fill="#1c6b52" letter-spacing="3">FARMERS</text>
-  <text x="120" y="190" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="32" fill="#1c6b52" letter-spacing="3">MARKET</text>
-</svg>
+    <div class="report-logo-text">
+      <div class="report-logo-farmers">FARMERS</div>
+      <div class="report-logo-market">MARKET</div>
+    </div>
 
     <div class="report-filter">
       <input type="date" id="reportFilterDate" onchange="applyReportFilterFromPicker()">
+      <!-- Dropdown filter platform -->
+      <select id="filterPlatform" onchange="applyAllFilters()" class="select-platform">
+        <option value="">Semua Order</option>
+        <option value="WHATSAPP">WhatsApp</option>
+        <option value="BLIBLI">Blibli</option>
+        <option value="GRABMART">Grabmart</option>
+      </select>
       <button type="button" class="btn-header-edit" onclick="enterEditMode()" title="Mode edit / hapus">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
@@ -1041,6 +1345,16 @@
         <span id="filterDateLabel">Filter</span>
       </button>
       <button type="button" class="btn-clear-cal" id="reportFilterClear" onclick="clearReportFilter()" title="Tampilkan semua">✕</button>
+      <button type="button" class="btn-xls" onclick="openExportModal()" title="Export Excel">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="12" y1="18" x2="12" y2="12"/>
+          <line x1="9" y1="15" x2="15" y2="15"/>
+        </svg>
+        XLS
+      </button>
+
     </div>
   </div>
 
@@ -1130,6 +1444,39 @@
     <div class="delete-bulk-actions">
       <button class="btn-del-cancel" style="flex:1;padding:11px;border-radius:10px;border:1.5px solid #ccc;background:#fff;font-size:14px;font-weight:700;cursor:pointer;color:#555;" onclick="closeBulkDeleteModal()">Batal</button>
       <button class="btn-del-confirm" style="flex:1;padding:11px;border-radius:10px;border:none;background:var(--red);font-size:14px;font-weight:700;cursor:pointer;color:#fff;" onclick="confirmBulkDelete()">Hapus Permanen</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ============ EXPORT EXCEL MODAL ============ -->
+<div class="xls-overlay" id="xlsOverlay" onclick="if(event.target===this)closeXlsModal()">
+  <div class="xls-card">
+    <div class="xls-head">
+      <h3>📊 Export Laporan Excel</h3>
+      <p>Pilih rentang tanggal laporan</p>
+    </div>
+    <div class="xls-body">
+      <div class="xls-field">
+        <label>Dari Tanggal</label>
+        <input type="date" id="xlsDateFrom" onchange="updateXlsInfo()">
+      </div>
+      <div class="xls-field">
+        <label>Sampai Tanggal</label>
+        <input type="date" id="xlsDateTo" onchange="updateXlsInfo()">
+      </div>
+      <div class="xls-info" id="xlsInfo">Pilih rentang tanggal</div>
+      <button class="btn-xls-dl" id="btnXlsDl" onclick="doExportXls()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Excel
+      </button>
+      <button class="btn-xls-cancel" onclick="closeXlsModal()">Batal</button>
     </div>
   </div>
 </div>
@@ -1613,6 +1960,8 @@ let _realtimeRef    = null; // simpan referensi agar bisa di-off() nanti
 function renderReportTable(){
   const dateInput = document.getElementById('reportFilterDate');
   if(dateInput) dateInput.value = '';
+  const platInput = document.getElementById('filterPlatform');
+  if(platInput) platInput.value = '';
   clearReportFilter();
 
   function paintRows(rows){
@@ -1700,26 +2049,49 @@ function drawReportRows(rows){
 }
 
 // ============================================================
-//  FILTER TANGGAL REPORT
+//  FILTER TANGGAL + PLATFORM REPORT
 // ============================================================
-function applyReportFilterFromPicker(){
-  const val = document.getElementById('reportFilterDate').value;
-  if(!val){ clearReportFilter(); return; }
-  const parts = val.split('-');
-  const label = `${parseInt(parts[2])}/${parseInt(parts[1])}/${parts[0]}`;
-  document.getElementById('filterDateLabel').textContent = label;
-  document.getElementById('reportFilterClear').classList.add('visible');
-  const filtered = reportRowsAll.filter(r => r.tanggalRaw === val);
+function applyAllFilters(){
+  const dateVal     = document.getElementById('reportFilterDate').value;
+  const platformVal = document.getElementById('filterPlatform').value;
+
+  let filtered = [...reportRowsAll];
+
+  // Filter tanggal
+  if(dateVal){
+    filtered = filtered.filter(r => r.tanggalRaw === dateVal);
+    const parts = dateVal.split('-');
+    const label = `${parseInt(parts[2])}/${parseInt(parts[1])}/${parts[0]}`;
+    document.getElementById('filterDateLabel').textContent = label;
+    document.getElementById('reportFilterClear').classList.add('visible');
+  } else {
+    document.getElementById('filterDateLabel').textContent = 'Filter';
+    document.getElementById('reportFilterClear').classList.remove('visible');
+  }
+
+  // Filter platform
+  if(platformVal){
+    filtered = filtered.filter(r => (r.orderBy||'').toUpperCase() === platformVal);
+  }
+
   drawReportRows(filtered);
-  if(!filtered.length) showToast('Tidak ada order pada tanggal tersebut.');
+
+  if(filtered.length === 0 && (dateVal || platformVal)){
+    showToast('Tidak ada order sesuai filter.');
+  }
+}
+
+function applyReportFilterFromPicker(){
+  applyAllFilters();
 }
 
 function applyReportFilter(){
-  applyReportFilterFromPicker();
+  applyAllFilters();
 }
 
 function clearReportFilter(){
   document.getElementById('reportFilterDate').value = '';
+  document.getElementById('filterPlatform').value = '';
   document.getElementById('filterDateLabel').textContent = 'Filter';
   document.getElementById('reportFilterClear').classList.remove('visible');
   drawReportRows(reportRowsAll);
@@ -1881,6 +2253,252 @@ async function confirmBulkDelete(){
   setTimeout(()=> renderReportTable(), 350);
 }
 
+// ============================================================
+//  EXPORT EXCEL — Format persis seperti referensi FM99
+// ============================================================
+
+function openExportModal(){
+  const td = new Date().toISOString().split('T')[0];
+  document.getElementById('xlsDateFrom').value = td;
+  document.getElementById('xlsDateTo').value   = td;
+  updateXlsInfo();
+  document.getElementById('xlsOverlay').classList.add('active');
+}
+
+function closeXlsModal(){
+  document.getElementById('xlsOverlay').classList.remove('active');
+}
+
+function getXlsData(){
+  const df = document.getElementById('xlsDateFrom').value;
+  const dt = document.getElementById('xlsDateTo').value;
+  if(!df || !dt) return { data:[], label:'-', df, dt };
+  const data = reportRowsAll.filter(r=>{
+    const raw = normalizeTanggalRaw(r);
+    return raw && raw >= df && raw <= dt;
+  });
+  const label = formatTglIndo(df) + ' s/d ' + formatTglIndo(dt);
+  return { data, label, df, dt };
+}
+
+function updateXlsInfo(){
+  const { data, label, df, dt } = getXlsData();
+  const el  = document.getElementById('xlsInfo');
+  const btn = document.getElementById('btnXlsDl');
+  if(!df || !dt){
+    el.textContent = 'Pilih rentang tanggal';
+    el.className = 'xls-info'; btn.disabled = true; return;
+  }
+  if(df > dt){
+    el.textContent = '\u26a0\ufe0f Tanggal awal tidak boleh melebihi tanggal akhir';
+    el.className = 'xls-info warn'; btn.disabled = true; return;
+  }
+  if(data.length === 0){
+    el.textContent = '\u26a0\ufe0f Tidak ada data untuk ' + label;
+    el.className = 'xls-info warn'; btn.disabled = true; return;
+  }
+  el.textContent = '\u2705 ' + data.length + ' order ditemukan untuk ' + label;
+  el.className = 'xls-info'; btn.disabled = false;
+}
+
+async function doExportXls(){
+  const { data, label } = getXlsData();
+  if(!data.length){ showToast('\u26a0\ufe0f Tidak ada data'); return; }
+
+  if(typeof ExcelJS === 'undefined'){
+    showToast('\u26a0\ufe0f Library belum siap, coba lagi.'); return;
+  }
+
+  const btn = document.getElementById('btnXlsDl');
+  btn.disabled = true;
+  btn.textContent = '\u23f3 Membuat file...';
+
+  try {
+    const C = {
+      title   : { argb:'FF1B5E20' },
+      subtitle: { argb:'FF388E3C' },
+      day     : { argb:'FF2E7D32' },
+      header  : { argb:'FF1B5E20' },
+      odd     : { argb:'FFC8E6C9' },
+      even    : { argb:'FFFFF3E0' },
+      white   : { argb:'FFFFFFFF' },
+      black   : { argb:'FF000000' },
+    };
+
+    const HARI  = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+    const BULAN = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    const HCOLS = ['No','Waktu Input','No Order','Tanggal','Jenis Order','PIC Dept','Driver/Picker','No. HP','No Plat','Foto Struk','Foto Picker'];
+    const N = HCOLS.length;
+
+    const grouped = {};
+    data.forEach(r=>{
+      const k = normalizeTanggalRaw(r)||'unknown';
+      if(!grouped[k]) grouped[k]=[];
+      grouped[k].push(r);
+    });
+    const days = Object.keys(grouped).sort();
+
+    function thinBorder(){
+      const s = { style:'thin', color:{ argb:'FFAAAAAA' } };
+      return { top:s, bottom:s, left:s, right:s };
+    }
+
+    function applyStyle(cell, val, bg, fontColor, bold, hAlign){
+      cell.value = val !== undefined && val !== null ? val : '';
+      cell.font  = { name:'Arial', size:10, bold:!!bold, color:fontColor };
+      cell.fill  = { type:'pattern', pattern:'solid', fgColor:bg };
+      cell.alignment = { horizontal:hAlign||'left', vertical:'middle', wrapText:false };
+      cell.border = thinBorder();
+    }
+
+    const wb = new ExcelJS.Workbook();
+    wb.creator = 'E-Log Book FM99';
+
+    const ws = wb.addWorksheet('Log Rapi', { views:[{showGridLines:false}] });
+    ws.columns = [
+      {width:5},{width:22},{width:18},{width:13},{width:13},
+      {width:16},{width:20},{width:16},{width:13},{width:45},{width:45}
+    ];
+
+    let rn = 1;
+
+    // Judul utama
+    ws.getRow(rn).height = 22;
+    applyStyle(ws.getRow(rn).getCell(1), 'E-LOG BOOK E-COMMERCE \u2014 FARMERS MARKET MARGO CITY', C.title, C.white, true, 'center');
+    for(let c=2;c<=N;c++){
+      const cell = ws.getRow(rn).getCell(c);
+      cell.fill = { type:'pattern', pattern:'solid', fgColor:C.title };
+      cell.border = thinBorder();
+    }
+    ws.mergeCells(rn,1,rn,N); rn++;
+
+    // Sub-judul
+    ws.getRow(rn).height = 16;
+    applyStyle(ws.getRow(rn).getCell(1), 'Periode: ' + label + '  |  Diurutkan berdasarkan Waktu Input', C.subtitle, C.white, false, 'center');
+    for(let c=2;c<=N;c++){
+      const cell = ws.getRow(rn).getCell(c);
+      cell.fill = { type:'pattern', pattern:'solid', fgColor:C.subtitle };
+      cell.border = thinBorder();
+    }
+    ws.mergeCells(rn,1,rn,N); rn++;
+
+    days.forEach(function(day){
+      const rows = grouped[day];
+      const dt2 = new Date(day+'T00:00:00');
+      const hariLabel = '\ud83d\udcc5  ' + HARI[dt2.getDay()] + ', ' + dt2.getDate() + ' ' + BULAN[dt2.getMonth()+1] + ' ' + dt2.getFullYear();
+
+      // Baris hari
+      ws.getRow(rn).height = 18;
+      applyStyle(ws.getRow(rn).getCell(1), hariLabel, C.day, C.white, true, 'center');
+      for(let c=2;c<=N;c++){
+        const cell = ws.getRow(rn).getCell(c);
+        cell.fill = { type:'pattern', pattern:'solid', fgColor:C.day };
+        cell.border = thinBorder();
+      }
+      ws.mergeCells(rn,1,rn,N); rn++;
+
+      // Header kolom
+      ws.getRow(rn).height = 16;
+      HCOLS.forEach(function(h,i){ applyStyle(ws.getRow(rn).getCell(i+1), h, C.header, C.white, true, 'center'); });
+      rn++;
+
+      // Data rows
+      rows.forEach(function(row, idx){
+        const bg = (idx%2===0) ? C.odd : C.even;
+        const waktu = row.createdAt ? new Date(row.createdAt).toLocaleString('id-ID',{timeZone:'Asia/Jakarta'}) : '-';
+        let fS = '-', fP = '-';
+        if(row.fotoStruk)  fS = row.fotoStruk.startsWith('data:')  ? '(tersimpan lokal)' : row.fotoStruk;
+        if(row.fotoPicker) fP = row.fotoPicker.startsWith('data:') ? '(tersimpan lokal)' : row.fotoPicker;
+
+        const vals = [idx+1, waktu, row.noOrder||'-', row.tanggal||'-', row.orderBy||'-',
+                      row.picDept||'-', row.namaDriver||'-', row.nomorDriver||'-', row.noPlat||'-', fS, fP];
+        ws.getRow(rn).height = 15;
+        vals.forEach(function(v,i){ applyStyle(ws.getRow(rn).getCell(i+1), v, bg, C.black, false, 'left'); });
+        ws.getRow(rn).getCell(1).alignment = { horizontal:'center', vertical:'middle' };
+        ws.getRow(rn).getCell(4).alignment = { horizontal:'center', vertical:'middle' };
+        ws.getRow(rn).getCell(5).alignment = { horizontal:'center', vertical:'middle' };
+
+        // Hyperlink foto
+        [9,10].forEach(function(ci){
+          const v = vals[ci];
+          if(typeof v==='string' && v.startsWith('http')){
+            ws.getRow(rn).getCell(ci+1).value = { text:v, hyperlink:v };
+            ws.getRow(rn).getCell(ci+1).font  = { name:'Arial', size:10, color:{argb:'FF0000EE'}, underline:true };
+          }
+        });
+        rn++;
+      });
+
+      rn++; // baris kosong
+    });
+
+    // Sheet Ringkasan
+    const wsS = wb.addWorksheet('Ringkasan', { views:[{showGridLines:false}] });
+    wsS.columns = [{width:30},{width:38}];
+
+    const orderCount = {};
+    data.forEach(function(row){ orderCount[row.orderBy||'Lainnya'] = (orderCount[row.orderBy||'Lainnya']||0)+1; });
+
+    let sr = 1;
+    wsS.getRow(sr).height = 20;
+    ['RINGKASAN LAPORAN',''].forEach(function(v,i){
+      const cell = wsS.getRow(sr).getCell(i+1);
+      cell.value = v;
+      cell.font  = { name:'Arial', size:11, bold:true, color:C.white };
+      cell.fill  = { type:'pattern', pattern:'solid', fgColor:C.title };
+      cell.alignment = { horizontal:'center', vertical:'middle' };
+      cell.border = thinBorder();
+    });
+    wsS.mergeCells(sr,1,sr,2); sr++;
+
+    const sumRows = [
+      ['Periode', label],
+      ['Total Order', data.length],
+      ['',''],
+      ['Breakdown per Platform',''],
+    ];
+    Object.entries(orderCount).forEach(function(e){ sumRows.push(['  '+e[0], e[1]]); });
+    sumRows.push(['','']);
+    sumRows.push(['Tanggal Export', new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'})]);
+    sumRows.push(['Diekspor oleh','E-Log Book Farmers Market Margo City']);
+
+    sumRows.forEach(function(pair){
+      wsS.getRow(sr).height = 15;
+      const c1 = wsS.getRow(sr).getCell(1);
+      const c2 = wsS.getRow(sr).getCell(2);
+      c1.value = pair[0]||''; c2.value = pair[1]!==undefined ? pair[1] : '';
+      c1.font  = { name:'Arial', size:10, bold:true, color:{argb:'FF155A44'} };
+      c2.font  = { name:'Arial', size:10 };
+      c1.fill  = { type:'pattern', pattern:'solid', fgColor:{argb:'FFE8F5EF'} };
+      c2.fill  = { type:'pattern', pattern:'solid', fgColor:{argb:'FFFFFFFF'} };
+      c2.alignment = { horizontal:'right', vertical:'middle' };
+      c1.border = thinBorder(); c2.border = thinBorder();
+      sr++;
+    });
+
+    // Download
+    const safeLabel = label.replace(/[/\\:*?"<>|]/g,'_');
+    const fileName  = 'ELogBook_FM99_' + safeLabel + '.xlsx';
+    const buf  = await wb.xlsx.writeBuffer();
+    const blob = new Blob([buf], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+
+    closeXlsModal();
+    showToast('\u2705 "' + fileName + '" berhasil didownload!', 4000);
+
+  } catch(err){
+    console.error('Export error:', err);
+    showToast('\u26a0\ufe0f Gagal export: ' + (err.message||String(err)), 5000);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Excel';
+  }
+}
 
 </script>
 </body>
