@@ -341,6 +341,20 @@
     gap:14px;
     position:relative;
   }
+  .btn-refresh-topbar{
+    display:flex; align-items:center; justify-content:center;
+    background:#2f6fe0; color:#fff; border:none;
+    width:32px; height:32px;
+    border-radius:8px; cursor:pointer; flex-shrink:0;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    transition:background .15s, transform .15s;
+  }
+  .btn-refresh-topbar:active{ background:#1f4fb8; transform:scale(.9); }
+  .btn-refresh-topbar.spinning svg{
+    animation: spin .6s linear infinite;
+  }
+  @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
   .btn-xls-topbar{
     display:flex; align-items:center; gap:5px;
     background:#1c6b52; color:#fff; border:none;
@@ -1261,6 +1275,9 @@
   <div class="topbar">
     <div class="close-btn" onclick="showScreen('home')">✕</div>
     <div class="title">REPORT DATA <span id="liveBadge" style="display:none;font-size:11px;font-weight:600;background:#4caf50;color:#fff;border-radius:10px;padding:2px 8px;letter-spacing:.5px;vertical-align:middle;">● LIVE</span></div>
+    <button class="btn-refresh-topbar" id="btnRefreshReport" onclick="refreshReportData()" title="Refresh data">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+    </button>
     <button class="btn-xls-topbar" id="btnXlsTopbar">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
       XLS
@@ -1913,7 +1930,7 @@ function renderReportTable(){
     // Matikan listener lama dulu (kalau user buka-tutup Report berkali-kali)
     if(_realtimeRef) _realtimeRef.off('value');
 
-    _realtimeRef = db.ref(FIREBASE_NODE).orderByChild('createdAt').limitToLast(100);
+    _realtimeRef = db.ref(FIREBASE_NODE).orderByChild('createdAt').limitToLast(500);
 
     // .on() = real-time: callback dipanggil setiap ada perubahan di Firebase
     _realtimeRef.on('value', snap => {
@@ -1945,6 +1962,21 @@ function renderReportTable(){
     const rows = JSON.parse(localStorage.getItem('elogbook_local') || '[]');
     paintRows(rows);
   }
+}
+
+// ============================================================
+//  REFRESH MANUAL
+// ============================================================
+function refreshReportData(){
+  const btn = document.getElementById('btnRefreshReport');
+  if(btn) btn.classList.add('spinning');
+
+  // Stop listener lama → re-init
+  stopRealtimeListener();
+  renderReportTable();
+
+  setTimeout(()=>{ if(btn) btn.classList.remove('spinning'); }, 800);
+  showToast('🔄 Data diperbarui', 2000);
 }
 
 // Matikan listener saat meninggalkan halaman Report
