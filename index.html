@@ -341,6 +341,67 @@
     gap:14px;
     position:relative;
   }
+  .btn-xls-topbar{
+    display:flex; align-items:center; gap:5px;
+    background:#1c6b52; color:#fff; border:none;
+    font-size:12px; font-weight:800; padding:0 12px;
+    border-radius:8px; cursor:pointer; height:32px;
+    letter-spacing:.5px; white-space:nowrap; flex-shrink:0;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation; user-select:none;
+  }
+  .btn-xls-topbar svg{ pointer-events:none; }
+  .xls-overlay{
+    display:none; position:fixed; inset:0;
+    background:rgba(0,0,0,.6); z-index:2000;
+    align-items:flex-end; justify-content:center;
+  }
+  .xls-overlay.open{ display:flex; }
+  .xls-card{
+    background:#fff; width:100%; max-width:480px;
+    border-radius:20px 20px 0 0; padding-bottom:24px;
+    animation:slideUp .2s ease-out;
+  }
+  .xls-head{
+    background:#1c6b52; padding:18px 20px 14px;
+    text-align:center; color:#fff;
+    border-radius:20px 20px 0 0;
+  }
+  .xls-head h3{ margin:0 0 3px; font-size:17px; font-weight:900; }
+  .xls-head p{ margin:0; font-size:12px; opacity:.8; }
+  .xls-body{ padding:20px 20px 0; }
+  .xls-field{ margin-bottom:14px; }
+  .xls-field label{
+    display:block; font-size:11px; font-weight:800;
+    color:#555; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;
+  }
+  .xls-field input[type=date]{
+    width:100%; box-sizing:border-box;
+    padding:11px 14px; border:1.5px solid #ddd;
+    border-radius:10px; font-size:15px; background:#fafafa;
+    -webkit-appearance:none;
+  }
+  .xls-info{
+    background:#eaf7f0; border:1.5px solid #b2dfcf;
+    color:#1c5e3a; font-size:13px; font-weight:600;
+    padding:11px 14px; border-radius:10px;
+    text-align:center; margin-bottom:14px;
+  }
+  .xls-info.warn{ background:#fff3f3; border-color:#ffb3b3; color:#c0002a; }
+  .btn-dl-xls{
+    width:100%; padding:15px; background:#1c6b52;
+    color:#fff; border:none; border-radius:12px;
+    font-size:15px; font-weight:900; cursor:pointer;
+    margin-bottom:10px; touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn-dl-xls:disabled{ background:#aaa; }
+  .btn-cancel-xls{
+    width:100%; padding:13px; background:none;
+    color:#888; border:1.5px solid #ddd;
+    border-radius:12px; font-size:14px; font-weight:700;
+    cursor:pointer; touch-action:manipulation;
+  }
   .topbar .close-btn{
     font-size:20px;
     cursor:pointer;
@@ -460,21 +521,28 @@
 
   /* ---------- REPORT ---------- */
   .report-header{
-    padding:20px 18px 14px;
+    padding:12px 14px 10px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:8px;
+    flex-wrap:nowrap;
+  }
+  .report-filter{
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    justify-content:flex-end;
+    flex-wrap:nowrap;
+    overflow:visible;
   }
   .report-table-wrap{
     flex:1;
     overflow:auto;
     padding:0 14px;
   }
-  .report-filter{
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
+
   .report-filter input[type="date"]{
     position:absolute;
     opacity:0;
@@ -1050,136 +1118,10 @@
     cursor:pointer;
   }
   .btn-login-cancel:active{background:#f5f5f5;}
-  /* ===== TOMBOL XLS ===== */
-  .btn-xls{
-    display:flex;
-    align-items:center;
-    gap:4px;
-    background:var(--fm-green);
-    color:#fff;
-    border:none;
-    font-size:11px;
-    font-weight:800;
-    padding:5px 9px;
-    border-radius:8px;
-    cursor:pointer;
-    height:34px;
-    letter-spacing:.5px;
-    white-space:nowrap;
-    transition:background .15s;
-    flex-shrink:0;
-  }
-  .btn-xls:active{background:var(--fm-dark);}
-
-  /* ===== EXPORT MODAL ===== */
-  .xls-overlay{
-    display:none;
-    position:fixed; inset:0;
-    background:rgba(0,0,0,.55);
-    z-index:1100;
-    align-items:flex-end;
-    justify-content:center;
-  }
-  .xls-overlay.active{display:flex;}
-  .xls-card{
-    background:#fff;
-    width:100%;
-    max-width:480px;
-    border-radius:20px 20px 0 0;
-    overflow:hidden;
-    animation:slideUp .22s ease-out;
-  }
-  .xls-head{
-    background:linear-gradient(135deg, var(--fm-green), var(--fm-green2));
-    padding:20px 20px 16px;
-    text-align:center;
-    color:#fff;
-  }
-  .xls-head h3{margin:0 0 4px; font-size:18px; font-weight:900;}
-  .xls-head p{margin:0; font-size:12px; opacity:.85;}
-  .xls-body{padding:20px;}
-  .xls-field{margin-bottom:16px;}
-  .xls-field label{
-    display:block;
-    font-size:11px;
-    font-weight:800;
-    color:#555;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    margin-bottom:7px;
-  }
-  .xls-field input[type="date"]{
-    width:100%;
-    padding:12px 14px;
-    border:1.5px solid #ddd;
-    border-radius:10px;
-    font-size:15px;
-    background:#fafafa;
-    color:#222;
-    -webkit-appearance:none;
-  }
-  .xls-field input[type="date"]:focus{
-    outline:none;
-    border-color:var(--fm-green);
-    background:#fff;
-  }
-  .xls-info{
-    background:#f0faf5;
-    border:1.5px solid #b2dfcf;
-    color:#155a44;
-    font-size:13px;
-    font-weight:600;
-    padding:12px 14px;
-    border-radius:10px;
-    text-align:center;
-    margin-bottom:16px;
-    min-height:44px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .xls-info.warn{
-    background:#fff3f3;
-    border-color:#ffb3b3;
-    color:#c0002a;
-  }
-  .btn-xls-dl{
-    width:100%;
-    padding:15px;
-    background:var(--fm-green);
-    color:#fff;
-    border:none;
-    border-radius:12px;
-    font-size:15px;
-    font-weight:900;
-    cursor:pointer;
-    letter-spacing:.5px;
-    margin-bottom:10px;
-    transition:background .15s, transform .1s;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-  }
-  .btn-xls-dl:active{background:var(--fm-dark); transform:scale(.98);}
-  .btn-xls-dl:disabled{background:#aaa; cursor:not-allowed; transform:none;}
-  .btn-xls-cancel{
-    width:100%;
-    padding:13px;
-    background:none;
-    color:#888;
-    border:1.5px solid #ddd;
-    border-radius:12px;
-    font-size:14px;
-    font-weight:700;
-    cursor:pointer;
-  }
-  .btn-xls-cancel:active{background:#f5f5f5;}
 
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 </head>
 <body>
 
@@ -1259,6 +1201,16 @@
     </div>
 
     <div class="field">
+      <label>Nomor Order</label>
+      <input type="text" id="f_noorder" placeholder="Contoh: WQDQD1WD1" required>
+    </div>
+
+    <div class="field">
+      <label>Nominal Pesanan (Rp)</label>
+      <input type="number" id="f_nominal" placeholder="Contoh: 150000" min="0">
+    </div>
+
+    <div class="field">
       <label>Nama Driver</label>
       <input type="text" id="f_namadriver" placeholder="Nama driver / pick up" required>
     </div>
@@ -1295,11 +1247,6 @@
       </label>
       <img class="upload-thumb" id="preview_picker" style="display:none;">
     </div>
-
-    <div class="field">
-      <label>Nomor Order</label>
-      <input type="text" id="f_noorder" placeholder="Contoh: WQDQD1WD1" required>
-    </div>
   </form>
 
   <div class="form-actions">
@@ -1314,6 +1261,10 @@
   <div class="topbar">
     <div class="close-btn" onclick="showScreen('home')">✕</div>
     <div class="title">REPORT DATA <span id="liveBadge" style="display:none;font-size:11px;font-weight:600;background:#4caf50;color:#fff;border-radius:10px;padding:2px 8px;letter-spacing:.5px;vertical-align:middle;">● LIVE</span></div>
+    <button class="btn-xls-topbar" id="btnXlsTopbar">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      XLS
+    </button>
   </div>
   <div class="back-strip" onclick="showScreen('home')" style="cursor:pointer;">‹ Back</div>
 
@@ -1345,17 +1296,8 @@
         <span id="filterDateLabel">Filter</span>
       </button>
       <button type="button" class="btn-clear-cal" id="reportFilterClear" onclick="clearReportFilter()" title="Tampilkan semua">✕</button>
-      <button type="button" class="btn-xls" onclick="openExportModal()" title="Export Excel">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <line x1="12" y1="18" x2="12" y2="12"/>
-          <line x1="9" y1="15" x2="15" y2="15"/>
-        </svg>
-        XLS
-      </button>
-
     </div>
+
   </div>
 
   <!-- Edit mode action bar -->
@@ -1451,8 +1393,9 @@
 
 
 
-<!-- ============ EXPORT EXCEL MODAL ============ -->
-<div class="xls-overlay" id="xlsOverlay" onclick="if(event.target===this)closeXlsModal()">
+
+<!-- EXPORT XLS MODAL -->
+<div id="xlsOverlay" class="xls-overlay">
   <div class="xls-card">
     <div class="xls-head">
       <h3>📊 Export Laporan Excel</h3>
@@ -1461,22 +1404,15 @@
     <div class="xls-body">
       <div class="xls-field">
         <label>Dari Tanggal</label>
-        <input type="date" id="xlsDateFrom" onchange="updateXlsInfo()">
+        <input type="date" id="xlsFrom">
       </div>
       <div class="xls-field">
         <label>Sampai Tanggal</label>
-        <input type="date" id="xlsDateTo" onchange="updateXlsInfo()">
+        <input type="date" id="xlsTo">
       </div>
       <div class="xls-info" id="xlsInfo">Pilih rentang tanggal</div>
-      <button class="btn-xls-dl" id="btnXlsDl" onclick="doExportXls()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        Download Excel
-      </button>
-      <button class="btn-xls-cancel" onclick="closeXlsModal()">Batal</button>
+      <button class="btn-dl-xls" id="btnDlXls" disabled>⬇️ Download Excel</button>
+      <button class="btn-cancel-xls" id="btnCancelXls">Batal</button>
     </div>
   </div>
 </div>
@@ -1889,6 +1825,9 @@ async function handleSubmit(evt){
   const btn = document.querySelector('.btn-submit');
   if(btn){ btn.disabled=true; btn.textContent='Menyimpan...'; }
 
+  const nominalRaw = document.getElementById('f_nominal')?.value;
+  const nominal = nominalRaw ? parseInt(nominalRaw) : 0;
+
   const orderData = {
     noOrder     : noorder,
     tanggal     : formatTanggal(tanggal),
@@ -1898,6 +1837,7 @@ async function handleSubmit(evt){
     nomorDriver : nomordriver,
     noPlat      : noplat,
     picDept     : picdept,
+    nominal     : nominal,
     fotoStruk   : fotoStrukBase64  || '',
     fotoPicker  : fotoPickerBase64 || '',
     createdAt   : Date.now()
@@ -1954,7 +1894,7 @@ async function handleSubmit(evt){
 //  RENDER REPORT TABLE  — real-time listener
 // ============================================================
 let reportRowsCache = [];   // rows yang sedang ditampilkan (sudah difilter)
-let reportRowsAll   = [];   // semua rows mentah (belum difilter)
+window.reportRowsAll = [];   // semua rows mentah (belum difilter)
 let _realtimeRef    = null; // simpan referensi agar bisa di-off() nanti
 
 function renderReportTable(){
@@ -1965,7 +1905,7 @@ function renderReportTable(){
   clearReportFilter();
 
   function paintRows(rows){
-    reportRowsAll = rows;
+    window.reportRowsAll = rows;
     drawReportRows(rows);
   }
 
@@ -2055,7 +1995,7 @@ function applyAllFilters(){
   const dateVal     = document.getElementById('reportFilterDate').value;
   const platformVal = document.getElementById('filterPlatform').value;
 
-  let filtered = [...reportRowsAll];
+  let filtered = [...(window.reportRowsAll||[])];
 
   // Filter tanggal
   if(dateVal){
@@ -2094,7 +2034,7 @@ function clearReportFilter(){
   document.getElementById('filterPlatform').value = '';
   document.getElementById('filterDateLabel').textContent = 'Filter';
   document.getElementById('reportFilterClear').classList.remove('visible');
-  drawReportRows(reportRowsAll);
+  drawReportRows(window.reportRowsAll);
 }
 
 function escHtml(str){
@@ -2253,253 +2193,231 @@ async function confirmBulkDelete(){
   setTimeout(()=> renderReportTable(), 350);
 }
 
-// ============================================================
-//  EXPORT EXCEL — Format persis seperti referensi FM99
-// ============================================================
 
-function openExportModal(){
-  const td = new Date().toISOString().split('T')[0];
-  document.getElementById('xlsDateFrom').value = td;
-  document.getElementById('xlsDateTo').value   = td;
-  updateXlsInfo();
-  document.getElementById('xlsOverlay').classList.add('active');
-}
+</script>
 
-function closeXlsModal(){
-  document.getElementById('xlsOverlay').classList.remove('active');
-}
+<script>
+// ── EXPORT XLS — event listener approach, bukan onclick ──
+(function(){
+  // Tunggu DOM ready
+  function initExport(){
+    var btnOpen   = document.getElementById('btnXlsTopbar');
+    var overlay   = document.getElementById('xlsOverlay');
+    var fromInput = document.getElementById('xlsFrom');
+    var toInput   = document.getElementById('xlsTo');
+    var info      = document.getElementById('xlsInfo');
+    var btnDl     = document.getElementById('btnDlXls');
+    var btnCancel = document.getElementById('btnCancelXls');
 
-function getXlsData(){
-  const df = document.getElementById('xlsDateFrom').value;
-  const dt = document.getElementById('xlsDateTo').value;
-  if(!df || !dt) return { data:[], label:'-', df, dt };
-  const data = reportRowsAll.filter(r=>{
-    const raw = normalizeTanggalRaw(r);
-    return raw && raw >= df && raw <= dt;
-  });
-  const label = formatTglIndo(df) + ' s/d ' + formatTglIndo(dt);
-  return { data, label, df, dt };
-}
+    if(!btnOpen || !overlay){ console.error('Export: elemen tidak ditemukan'); return; }
 
-function updateXlsInfo(){
-  const { data, label, df, dt } = getXlsData();
-  const el  = document.getElementById('xlsInfo');
-  const btn = document.getElementById('btnXlsDl');
-  if(!df || !dt){
-    el.textContent = 'Pilih rentang tanggal';
-    el.className = 'xls-info'; btn.disabled = true; return;
-  }
-  if(df > dt){
-    el.textContent = '\u26a0\ufe0f Tanggal awal tidak boleh melebihi tanggal akhir';
-    el.className = 'xls-info warn'; btn.disabled = true; return;
-  }
-  if(data.length === 0){
-    el.textContent = '\u26a0\ufe0f Tidak ada data untuk ' + label;
-    el.className = 'xls-info warn'; btn.disabled = true; return;
-  }
-  el.textContent = '\u2705 ' + data.length + ' order ditemukan untuk ' + label;
-  el.className = 'xls-info'; btn.disabled = false;
-}
-
-async function doExportXls(){
-  const { data, label } = getXlsData();
-  if(!data.length){ showToast('\u26a0\ufe0f Tidak ada data'); return; }
-
-  if(typeof ExcelJS === 'undefined'){
-    showToast('\u26a0\ufe0f Library belum siap, coba lagi.'); return;
-  }
-
-  const btn = document.getElementById('btnXlsDl');
-  btn.disabled = true;
-  btn.textContent = '\u23f3 Membuat file...';
-
-  try {
-    const C = {
-      title   : { argb:'FF1B5E20' },
-      subtitle: { argb:'FF388E3C' },
-      day     : { argb:'FF2E7D32' },
-      header  : { argb:'FF1B5E20' },
-      odd     : { argb:'FFC8E6C9' },
-      even    : { argb:'FFFFF3E0' },
-      white   : { argb:'FFFFFFFF' },
-      black   : { argb:'FF000000' },
-    };
-
-    const HARI  = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-    const BULAN = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-    const HCOLS = ['No','Waktu Input','No Order','Tanggal','Jenis Order','PIC Dept','Driver/Picker','No. HP','No Plat','Foto Struk','Foto Picker'];
-    const N = HCOLS.length;
-
-    const grouped = {};
-    data.forEach(r=>{
-      const k = normalizeTanggalRaw(r)||'unknown';
-      if(!grouped[k]) grouped[k]=[];
-      grouped[k].push(r);
-    });
-    const days = Object.keys(grouped).sort();
-
-    function thinBorder(){
-      const s = { style:'thin', color:{ argb:'FFAAAAAA' } };
-      return { top:s, bottom:s, left:s, right:s };
+    function openModal(){
+      var td = new Date().toISOString().split('T')[0];
+      fromInput.value = td;
+      toInput.value   = td;
+      overlay.classList.add('open');
+      // Delay agar reportRowsAll sudah terisi dari Firebase
+      setTimeout(checkData, 300);
     }
 
-    function applyStyle(cell, val, bg, fontColor, bold, hAlign){
-      cell.value = val !== undefined && val !== null ? val : '';
-      cell.font  = { name:'Arial', size:10, bold:!!bold, color:fontColor };
-      cell.fill  = { type:'pattern', pattern:'solid', fgColor:bg };
-      cell.alignment = { horizontal:hAlign||'left', vertical:'middle', wrapText:false };
-      cell.border = thinBorder();
+    function closeModal(){
+      overlay.classList.remove('open');
     }
 
-    const wb = new ExcelJS.Workbook();
-    wb.creator = 'E-Log Book FM99';
-
-    const ws = wb.addWorksheet('Log Rapi', { views:[{showGridLines:false}] });
-    ws.columns = [
-      {width:5},{width:22},{width:18},{width:13},{width:13},
-      {width:16},{width:20},{width:16},{width:13},{width:45},{width:45}
-    ];
-
-    let rn = 1;
-
-    // Judul utama
-    ws.getRow(rn).height = 22;
-    applyStyle(ws.getRow(rn).getCell(1), 'E-LOG BOOK E-COMMERCE \u2014 FARMERS MARKET MARGO CITY', C.title, C.white, true, 'center');
-    for(let c=2;c<=N;c++){
-      const cell = ws.getRow(rn).getCell(c);
-      cell.fill = { type:'pattern', pattern:'solid', fgColor:C.title };
-      cell.border = thinBorder();
-    }
-    ws.mergeCells(rn,1,rn,N); rn++;
-
-    // Sub-judul
-    ws.getRow(rn).height = 16;
-    applyStyle(ws.getRow(rn).getCell(1), 'Periode: ' + label + '  |  Diurutkan berdasarkan Waktu Input', C.subtitle, C.white, false, 'center');
-    for(let c=2;c<=N;c++){
-      const cell = ws.getRow(rn).getCell(c);
-      cell.fill = { type:'pattern', pattern:'solid', fgColor:C.subtitle };
-      cell.border = thinBorder();
-    }
-    ws.mergeCells(rn,1,rn,N); rn++;
-
-    days.forEach(function(day){
-      const rows = grouped[day];
-      const dt2 = new Date(day+'T00:00:00');
-      const hariLabel = '\ud83d\udcc5  ' + HARI[dt2.getDay()] + ', ' + dt2.getDate() + ' ' + BULAN[dt2.getMonth()+1] + ' ' + dt2.getFullYear();
-
-      // Baris hari
-      ws.getRow(rn).height = 18;
-      applyStyle(ws.getRow(rn).getCell(1), hariLabel, C.day, C.white, true, 'center');
-      for(let c=2;c<=N;c++){
-        const cell = ws.getRow(rn).getCell(c);
-        cell.fill = { type:'pattern', pattern:'solid', fgColor:C.day };
-        cell.border = thinBorder();
+    function getRaw(r){
+      // 1. tanggalRaw sudah YYYY-MM-DD — paling reliable
+      if(r.tanggalRaw && /^\d{4}-\d{2}-\d{2}$/.test(r.tanggalRaw)) return r.tanggalRaw;
+      // 2. parse dari r.tanggal (format M/D/YYYY dari formatTanggal)
+      if(r.tanggal){
+        var parts = String(r.tanggal).split('/');
+        if(parts.length === 3 && parts[2].length === 4){
+          return parts[2]+'-'+parts[0].padStart(2,'0')+'-'+parts[1].padStart(2,'0');
+        }
       }
-      ws.mergeCells(rn,1,rn,N); rn++;
+      // 3. fallback: dari createdAt timestamp
+      if(r.createdAt){
+        var d = new Date(r.createdAt);
+        if(!isNaN(d)){
+          return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+        }
+      }
+      return null;
+    }
 
-      // Header kolom
-      ws.getRow(rn).height = 16;
-      HCOLS.forEach(function(h,i){ applyStyle(ws.getRow(rn).getCell(i+1), h, C.header, C.white, true, 'center'); });
-      rn++;
+    function normalizeInputDate(v){
+      if(!v) return null;
+      // sudah YYYY-MM-DD
+      if(/^\d{4}-\d{2}-\d{2}$/.test(v)) return v;
+      // format DD/MM/YYYY
+      var p = v.split('/');
+      if(p.length===3 && p[2].length===4) return p[2]+'-'+p[1].padStart(2,'0')+'-'+p[0].padStart(2,'0');
+      // format M/D/YYYY
+      if(p.length===3 && p[2].length===4) return p[2]+'-'+p[0].padStart(2,'0')+'-'+p[1].padStart(2,'0');
+      return v;
+    }
 
-      // Data rows
-      rows.forEach(function(row, idx){
-        const bg = (idx%2===0) ? C.odd : C.even;
-        const waktu = row.createdAt ? new Date(row.createdAt).toLocaleString('id-ID',{timeZone:'Asia/Jakarta'}) : '-';
-        let fS = '-', fP = '-';
-        if(row.fotoStruk)  fS = row.fotoStruk.startsWith('data:')  ? '(tersimpan lokal)' : row.fotoStruk;
-        if(row.fotoPicker) fP = row.fotoPicker.startsWith('data:') ? '(tersimpan lokal)' : row.fotoPicker;
-
-        const vals = [idx+1, waktu, row.noOrder||'-', row.tanggal||'-', row.orderBy||'-',
-                      row.picDept||'-', row.namaDriver||'-', row.nomorDriver||'-', row.noPlat||'-', fS, fP];
-        ws.getRow(rn).height = 15;
-        vals.forEach(function(v,i){ applyStyle(ws.getRow(rn).getCell(i+1), v, bg, C.black, false, 'left'); });
-        ws.getRow(rn).getCell(1).alignment = { horizontal:'center', vertical:'middle' };
-        ws.getRow(rn).getCell(4).alignment = { horizontal:'center', vertical:'middle' };
-        ws.getRow(rn).getCell(5).alignment = { horizontal:'center', vertical:'middle' };
-
-        // Hyperlink foto
-        [9,10].forEach(function(ci){
-          const v = vals[ci];
-          if(typeof v==='string' && v.startsWith('http')){
-            ws.getRow(rn).getCell(ci+1).value = { text:v, hyperlink:v };
-            ws.getRow(rn).getCell(ci+1).font  = { name:'Arial', size:10, color:{argb:'FF0000EE'}, underline:true };
-          }
-        });
-        rn++;
+    function getFilteredData(){
+      var df = normalizeInputDate(fromInput.value);
+      var dt = normalizeInputDate(toInput.value);
+      if(!df || !dt) return null;
+      var all = window.reportRowsAll || [];
+      console.log('[Export] total data:', all.length, 'filter:', df, '-', dt);
+      if(all.length > 0) console.log('[Export] sample raw:', getRaw(all[0]), 'tanggalRaw:', all[0].tanggalRaw, 'tanggal:', all[0].tanggal);
+      var result = all.filter(function(r){
+        var raw = getRaw(r);
+        return raw && raw >= df && raw <= dt;
       });
+      console.log('[Export] filtered:', result.length);
+      return result;
+    }
 
-      rn++; // baris kosong
-    });
+    function checkData(){
+      var df = normalizeInputDate(fromInput.value);
+      var dt = normalizeInputDate(toInput.value);
+      if(!df || !dt){ info.textContent='Pilih rentang tanggal'; info.className='xls-info'; btnDl.disabled=true; return; }
+      if(df>dt){ info.textContent='⚠️ Tanggal awal > tanggal akhir'; info.className='xls-info warn'; btnDl.disabled=true; return; }
+      var d = getFilteredData();
+      if(!d||!d.length){ info.textContent='⚠️ Tidak ada data'; info.className='xls-info warn'; btnDl.disabled=true; return; }
+      var totalNom = d.reduce(function(acc,r){ return acc+(r.nominal||0); },0);
+      var nomStr = totalNom > 0 ? ' · Rp '+totalNom.toLocaleString('id-ID') : '';
+      info.textContent='✅ '+d.length+' order ditemukan'+nomStr;
+      info.className='xls-info'; btnDl.disabled=false;
+    }
 
-    // Sheet Ringkasan
-    const wsS = wb.addWorksheet('Ringkasan', { views:[{showGridLines:false}] });
-    wsS.columns = [{width:30},{width:38}];
+    function download(){
+      var data = getFilteredData();
+      if(!data||!data.length){ return; }
+      btnDl.disabled=true; btnDl.textContent='⏳ Membuat...';
 
-    const orderCount = {};
-    data.forEach(function(row){ orderCount[row.orderBy||'Lainnya'] = (orderCount[row.orderBy||'Lainnya']||0)+1; });
+      setTimeout(function(){
+        try{
+          var df=fromInput.value, dt=toInput.value;
+          var label=df+' sd '+dt;
+          var HARI=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+          var BULAN=['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+          var COLS=['No','Waktu Input','No Order','Tanggal','Jenis Order','PIC Dept','Driver','No.HP','No Plat','Nominal (Rp)','Foto Struk','Foto Picker'];
 
-    let sr = 1;
-    wsS.getRow(sr).height = 20;
-    ['RINGKASAN LAPORAN',''].forEach(function(v,i){
-      const cell = wsS.getRow(sr).getCell(i+1);
-      cell.value = v;
-      cell.font  = { name:'Arial', size:11, bold:true, color:C.white };
-      cell.fill  = { type:'pattern', pattern:'solid', fgColor:C.title };
-      cell.alignment = { horizontal:'center', vertical:'middle' };
-      cell.border = thinBorder();
-    });
-    wsS.mergeCells(sr,1,sr,2); sr++;
+          // Kelompok per hari
+          var grouped={};
+          data.forEach(function(r){
+            var k = getRaw(r) || 'unknown';
+            if(!grouped[k]) grouped[k]=[];
+            grouped[k].push(r);
+          });
+          var days=Object.keys(grouped).sort();
 
-    const sumRows = [
-      ['Periode', label],
-      ['Total Order', data.length],
-      ['',''],
-      ['Breakdown per Platform',''],
-    ];
-    Object.entries(orderCount).forEach(function(e){ sumRows.push(['  '+e[0], e[1]]); });
-    sumRows.push(['','']);
-    sumRows.push(['Tanggal Export', new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'})]);
-    sumRows.push(['Diekspor oleh','E-Log Book Farmers Market Margo City']);
+          // Build CSV dulu sebagai fallback yg pasti jalan
+          // Tapi kita coba build XLSX sederhana
+          var lines=[];
+          lines.push(['E-LOG BOOK E-COMMERCE - FARMERS MARKET MARGO CITY']);
+          lines.push(['Periode: '+df+' s/d '+dt]);
+          lines.push([]);
 
-    sumRows.forEach(function(pair){
-      wsS.getRow(sr).height = 15;
-      const c1 = wsS.getRow(sr).getCell(1);
-      const c2 = wsS.getRow(sr).getCell(2);
-      c1.value = pair[0]||''; c2.value = pair[1]!==undefined ? pair[1] : '';
-      c1.font  = { name:'Arial', size:10, bold:true, color:{argb:'FF155A44'} };
-      c2.font  = { name:'Arial', size:10 };
-      c1.fill  = { type:'pattern', pattern:'solid', fgColor:{argb:'FFE8F5EF'} };
-      c2.fill  = { type:'pattern', pattern:'solid', fgColor:{argb:'FFFFFFFF'} };
-      c2.alignment = { horizontal:'right', vertical:'middle' };
-      c1.border = thinBorder(); c2.border = thinBorder();
-      sr++;
-    });
+          days.forEach(function(day){
+            var dt2=new Date(day+'T00:00:00');
+            lines.push([HARI[dt2.getDay()]+', '+dt2.getDate()+' '+BULAN[dt2.getMonth()+1]+' '+dt2.getFullYear()]);
+            lines.push(COLS);
+            grouped[day].forEach(function(r,i){
+              var waktu=r.createdAt?new Date(r.createdAt).toLocaleString('id-ID'):'-';
+              var fS=r.fotoStruk?(r.fotoStruk.startsWith('data:')?'(lokal)':r.fotoStruk):'-';
+              var fP=r.fotoPicker?(r.fotoPicker.startsWith('data:')?'(lokal)':r.fotoPicker):'-';
+              var nom = r.nominal ? r.nominal : 0;
+              lines.push([i+1,waktu,r.noOrder||'-',r.tanggal||'-',r.orderBy||'-',
+                          r.picDept||'-',r.namaDriver||'-',r.nomorDriver||'-',r.noPlat||'-',nom,fS,fP]);
+            });
 
-    // Download
-    const safeLabel = label.replace(/[/\\:*?"<>|]/g,'_');
-    const fileName  = 'ELogBook_FM99_' + safeLabel + '.xlsx';
-    const buf  = await wb.xlsx.writeBuffer();
-    const blob = new Blob([buf], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href = url; a.download = fileName;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+            // ── Ringkasan nominal per platform untuk hari ini ──
+            var platTotals={};
+            var grandTotal=0;
+            grouped[day].forEach(function(r){
+              var p=r.orderBy||'Lainnya';
+              var n=r.nominal||0;
+              platTotals[p]=(platTotals[p]||0)+n;
+              grandTotal+=n;
+            });
+            lines.push([]);
+            lines.push(['--- Ringkasan Nominal ---']);
+            Object.keys(platTotals).sort().forEach(function(p){
+              var rupiah='Rp '+platTotals[p].toLocaleString('id-ID');
+              lines.push(['',p+' :',rupiah]);
+            });
+            lines.push(['','TOTAL HARI INI :','Rp '+grandTotal.toLocaleString('id-ID')]);
+            lines.push([]);
+          });
 
-    closeXlsModal();
-    showToast('\u2705 "' + fileName + '" berhasil didownload!', 4000);
+          // ── Ringkasan nominal keseluruhan periode ──
+          var allPlatTotals={};
+          var allGrandTotal=0;
+          data.forEach(function(r){
+            var p=r.orderBy||'Lainnya';
+            var n=r.nominal||0;
+            allPlatTotals[p]=(allPlatTotals[p]||0)+n;
+            allGrandTotal+=n;
+          });
+          lines.push(['=== RINGKASAN TOTAL PERIODE ===']);
+          Object.keys(allPlatTotals).sort().forEach(function(p){
+            lines.push([p+' :', 'Rp '+allPlatTotals[p].toLocaleString('id-ID')]);
+          });
+          lines.push(['TOTAL KESELURUHAN :', 'Rp '+allGrandTotal.toLocaleString('id-ID')]);
+          lines.push([]);
 
-  } catch(err){
-    console.error('Export error:', err);
-    showToast('\u26a0\ufe0f Gagal export: ' + (err.message||String(err)), 5000);
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Excel';
+          // Export sebagai CSV (pasti jalan di semua browser/Android)
+          var csv=lines.map(function(row){
+            return row.map(function(v){
+              var s=String(v===null||v===undefined?'':v);
+              if(s.includes(',')||s.includes('"')||s.includes('\n')) s='"'+s.replace(/"/g,'""')+'"';
+              return s;
+            }).join(',');
+          }).join('\r\n');
+
+          // BOM untuk Excel agar bisa baca UTF-8
+          var bom='\uFEFF';
+          var blob=new Blob([bom+csv],{type:'text/csv;charset=utf-8;'});
+          var url=URL.createObjectURL(blob);
+          var a=document.createElement('a');
+          a.href=url;
+          a.download='ELogBook_FM99_'+label+'.csv';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); },1500);
+
+          closeModal();
+          if(window.showToast) window.showToast('✅ File berhasil didownload!',3000);
+
+        }catch(e){
+          console.error(e);
+          alert('Gagal export: '+e.message);
+        }finally{
+          btnDl.disabled=false;
+          btnDl.textContent='⬇️ Download Excel';
+        }
+      },80);
+    }
+
+    // Event listeners — lebih reliable dari onclick di mobile
+    btnOpen.addEventListener('click', openModal);
+    btnOpen.addEventListener('touchend', function(e){ e.preventDefault(); openModal(); });
+
+    btnCancel.addEventListener('click', closeModal);
+    btnCancel.addEventListener('touchend', function(e){ e.preventDefault(); closeModal(); });
+
+    overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
+
+    btnDl.addEventListener('click', download);
+    btnDl.addEventListener('touchend', function(e){ e.preventDefault(); if(!btnDl.disabled) download(); });
+
+    fromInput.addEventListener('change', checkData);
+    toInput.addEventListener('change', checkData);
+
+    console.log('Export XLS: init OK');
   }
-}
 
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', initExport);
+  } else {
+    initExport();
+  }
+})();
 </script>
 </body>
 </html>
