@@ -1882,11 +1882,33 @@ async function handleSubmit(evt){
     if(fotoPickerUrl) orderData.fotoPicker = fotoPickerUrl;
   }
 
-  // --- 2b. Coba simpan ke Firebase Realtime Database (non-blocking) ---
+  // --- 2b. Simpan ke Firebase (blocking + retry queue jika gagal) ---
+  let firebaseOk = false;
   if(db){
-    db.ref(FIREBASE_NODE).push(orderData)
-      .then(()=> console.log("✅ Firebase tersimpan"))
-      .catch(e => console.warn("⚠️ Firebase gagal (sudah di localStorage):", e.message));
+    if(btn){ btn.textContent='Menyimpan ke server... ⏳'; btn.disabled=true; }
+    try {
+      await db.ref(FIREBASE_NODE).push(orderData);
+      console.log("✅ Firebase tersimpan");
+      firebaseOk = true;
+      try {
+        let list = JSON.parse(localStorage.getItem('elogbook_local')||'[]');
+        list = list.map(item => item.createdAt === orderData.createdAt ? {...item, _synced:true} : item);
+        localStorage.setItem('elogbook_local', JSON.stringify(list));
+      } catch(e){}
+    } catch(e) {
+      console.warn("⚠️ Firebase push gagal:", e.message);
+      try {
+        let queue = JSON.parse(localStorage.getItem('elogbook_retry')||'[]');
+        if(!queue.find(q => q.createdAt === orderData.createdAt)) queue.push({...orderData, _synced:false});
+        localStorage.setItem('elogbook_retry', JSON.stringify(queue));
+      } catch(e2){}
+    }
+  } else {
+    try {
+      let queue = JSON.parse(localStorage.getItem('elogbook_retry')||'[]');
+      if(!queue.find(q => q.createdAt === orderData.createdAt)) queue.push({...orderData, _synced:false});
+      localStorage.setItem('elogbook_retry', JSON.stringify(queue));
+    } catch(e){}
   }
 
   // --- 3. Kirim email via EmailJS ---
@@ -1920,6 +1942,8 @@ function renderReportTable(){
   const platInput = document.getElementById('filterPlatform');
   if(platInput) platInput.value = '';
   clearReportFilter();
+  // Auto retry pending data setiap kali report dibuka
+  if(db) retrySyncPending().catch(()=>{});
 
   function paintRows(rows){
     window.reportRowsAll = rows;
@@ -1930,7 +1954,8 @@ function renderReportTable(){
     // Matikan listener lama dulu (kalau user buka-tutup Report berkali-kali)
     if(_realtimeRef) _realtimeRef.off('value');
 
-    _realtimeRef = db.ref(FIREBASE_NODE).orderByChild('createdAt').limitToLast(500);
+    // Baca tanpa orderByChild agar data base64 besar tidak gagal
+    _realtimeRef = db.ref(FIREBASE_NODE);
 
     // .on() = real-time: callback dipanggil setiap ada perubahan di Firebase
     _realtimeRef.on('value', snap => {
@@ -1939,16 +1964,33 @@ function renderReportTable(){
       if(badge) badge.style.display = 'inline';
 
       const rows = [];
-      snap.forEach(c => rows.push(c.val()));
-      rows.reverse(); // terbaru di atas
+      snap.forEach(c => {
+        const val = c.val();
+        // Strip base64 dari foto agar tidak memberatkan — gunakan placeholder
+        if(val.fotoStruk && val.fotoStruk.startsWith('data:')) val.fotoStruk = '__local__';
+        if(val.fotoPicker && val.fotoPicker.startsWith('data:')) val.fotoPicker = '__local__';
+        rows.push(val);
+      });
+      // Urutkan manual: terbaru di atas
+      rows.sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
 
-      // Gabung localStorage (data offline / belum sync)
+      // Gabung localStorage (data offline / belum sync ke Firebase)
       const local = JSON.parse(localStorage.getItem('elogbook_local') || '[]');
+      const retryQueue = JSON.parse(localStorage.getItem('elogbook_retry') || '[]');
       const merged = [...rows];
+      retryQueue.forEach(l => {
+        if(!rows.find(r => r.createdAt === l.createdAt)){
+          merged.unshift({...l, _pending: true});
+        }
+      });
       local.forEach(l => {
-        if(!rows.find(r => r.createdAt === l.createdAt)) merged.unshift(l);
+        if(!rows.find(r => r.createdAt === l.createdAt) &&
+           !retryQueue.find(r => r.createdAt === l.createdAt)){
+          merged.unshift(l);
+        }
       });
 
+      console.log('Firebase rows:', rows.length, 'Total merged:', merged.length);
       paintRows(merged);
     }, err => {
       // Firebase error → fallback localStorage
@@ -1965,11 +2007,40 @@ function renderReportTable(){
 }
 
 // ============================================================
+//  RETRY SYNC — kirim ulang data yang gagal ke Firebase
+// ============================================================
+async function retrySyncPending(){
+  if(!db) return;
+  try {
+    const queue = JSON.parse(localStorage.getItem('elogbook_retry')||'[]');
+    if(!queue.length) return;
+    console.log(`🔁 Retry sync ${queue.length} data pending...`);
+    const remaining = [];
+    for(const item of queue){
+      try {
+        await db.ref(FIREBASE_NODE).push(item);
+        console.log('✅ Retry sync OK:', item.noOrder);
+      } catch(e){
+        console.warn('⚠️ Retry gagal:', item.noOrder, e.message);
+        remaining.push(item);
+      }
+    }
+    localStorage.setItem('elogbook_retry', JSON.stringify(remaining));
+    if(remaining.length < queue.length){
+      showToast(`✅ ${queue.length - remaining.length} data pending berhasil disinkronkan`, 3000);
+    }
+  } catch(e){ console.warn('retrySyncPending error:', e); }
+}
+
+// ============================================================
 //  REFRESH MANUAL
 // ============================================================
-function refreshReportData(){
+async function refreshReportData(){
   const btn = document.getElementById('btnRefreshReport');
   if(btn) btn.classList.add('spinning');
+
+  // Coba sync data yang pending dulu
+  await retrySyncPending();
 
   // Stop listener lama → re-init
   stopRealtimeListener();
@@ -2008,9 +2079,10 @@ function drawReportRows(rows){
       }
       openDetail(i);
     };
+    if(r._pending) tr.style.background = '#fff8e1';
     tr.innerHTML = `
       <td class="td-check col-check"><input type="checkbox" class="row-cb" data-index="${i}" onchange="onRowCheckChange()"></td>
-      <td>${escHtml(r.noOrder||'')}</td>
+      <td>${escHtml(r.noOrder||'')}${r._pending ? ' <span style="font-size:10px;color:#e67e00;font-weight:700;">⏳</span>' : ''}</td>
       <td>${escHtml(r.tanggal||'')}</td>
       <td>${escHtml(r.orderBy||'')}</td>
       <td>${escHtml(r.picDept||'')}</td>
